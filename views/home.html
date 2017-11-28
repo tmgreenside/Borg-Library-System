@@ -8,16 +8,38 @@
     </head>
     <body>
         <h1>Browse Inventory</h1>
-        <select id="selectType" onchange="myFunction()">
+        <p id="debugvalue">Stuffage</p>
+        <select id="selectType" onchange="setDisplayComponents()">
             <option disabled selected>Select Type...</option>
             <option>Book</option>
             <option>Film</option>
             <option>Audio</option>
         </select>
-        <p id="trev_messageboard">Options are selected here</p>
+        <select id="selectBookAttr" name="selectBookAttr" style="display: none">
+            <option disabled selected>Search by...</option>
+            <option>ISBN</option>
+            <option>Author</option>
+        </select>
+        <select id="selectFilmAttr" name="selectFilmAttr" style="display: none">
+            <option disabled selected>Search by...</option>
+            <option>FilmID</option>
+            <option>Director</option>
+        </select>
+        <select id="selectAudioAttr" name="selectAudioAttr" style="display: none">
+            <option disabled selected>Search by...</option>
+            <option>AudioID</option>
+            <option>Artist</option>
+        </select>
         <script>
-            function myFunction() {
-                document.getElementById("trev_messageboard").innerHTML = "Fixed the thing" + clickCount.toString();
+            function setDisplayComponents() {
+                var selection = document.getElementById("selectType").value;
+                var itemTypes = ["Book","Film","Audio"];
+                for(var i = 0; i < itemTypes.length; i++) {
+                    if(selection === itemTypes[i])
+                        document.getElementById("select" + itemTypes[i] + "Attr").style="display:inline";
+                    else
+                        document.getElementById("select" + itemTypes[i] + "Attr").style="display:none";
+                }
             }
         </script>
     </body>
