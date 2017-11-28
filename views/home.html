@@ -8,6 +8,17 @@
     </head>
     <body>
         <h1>Browse Inventory</h1>
-        
+        <select id="selectType" onchange="myFunction()">
+            <option disabled selected>Select Type...</option>
+            <option>Book</option>
+            <option>Film</option>
+            <option>Audio</option>
+        </select>
+        <p id="trev_messageboard">Options are selected here</p>
+        <script>
+            function myFunction() {
+                document.getElementById("trev_messageboard").innerHTML = "Fixed the thing" + clickCount.toString();
+            }
+        </script>
     </body>
 </html>
