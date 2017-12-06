@@ -2,15 +2,22 @@ var crypto = require('crypto');
 var express = require('express');
 var sql = require('mysql');
 
+// additional control and query functions
+var controller = require('./controllers/controller');
+
 // configuration for database
 var dbConfig = {
     server:'localhost',
     database:'personal',
-    user:'root',
-    password:'tempcbsql',
+    user:'tgreenside',
+    password:'bowers321',
     port:3306,
     multipleStatements: true // overrides a protective measure
 };
+
+// connection to the SQL database
+const con = sql.createConnection(dbConfig);
+con.connect();
 
 // send 404 response:
 function send404Response(res){
@@ -28,30 +35,5 @@ module.exports = function(app) {
         res.send("This is something. Here's a random page!");
     });
     
-    app.post('/', function(req, res) {
-        var con = sql.createConnection(dbConfig);
-        
-        con.connect(function(err) {
-            if (err) throw err;
-            var userName = req.body.usernameEntry;
-            var userPassEnter = req.body.userPass;
-            //var queryUsers = "SELECT * FROM Users";
-            queryUsers = 'SELECT * FROM Users WHERE username ="' + userName + '"';
-            //queryTemp = 'SELECT * FROM Users WHERE username = "Trevor"; DROP TABLE IF EXISTS showHenadz';
-            console.log(queryUsers);
-            con.query(queryUsers, function (err, result) {
-                if (err) throw err;
-                var authenticated = false;
-                for (var i = 0; i < result.length; i++) {
-                    if(result[i].userpass === userPassEnter) {
-                        authenticated = true;
-                    }
-                }
-                if(authenticated)
-                    res.send("You will be authenticated! Authenticate! Authenticate!");
-                else
-                    res.send("Intruder! Exterminate! Exterminate!");
-            });
-        });
-    });
+    app.post('/', controller.findItems);
 };

@@ -8,28 +8,30 @@
     </head>
     <body>
         <h1>Browse Inventory</h1>
-        <p id="debugvalue">Stuffage</p>
-        <select id="selectType" onchange="setDisplayComponents()">
-            <option disabled selected>Select Type...</option>
-            <option>Book</option>
-            <option>Film</option>
-            <option>Audio</option>
-        </select>
-        <select id="selectBookAttr" name="selectBookAttr" style="display: none">
-            <option disabled selected>Search by...</option>
-            <option>ISBN</option>
-            <option>Author</option>
-        </select>
-        <select id="selectFilmAttr" name="selectFilmAttr" style="display: none">
-            <option disabled selected>Search by...</option>
-            <option>FilmID</option>
-            <option>Director</option>
-        </select>
-        <select id="selectAudioAttr" name="selectAudioAttr" style="display: none">
-            <option disabled selected>Search by...</option>
-            <option>AudioID</option>
-            <option>Artist</option>
-        </select>
+        <form method="post">
+            <select name="selectType" id="selectType" onchange="setDisplayComponents()">
+                <option disabled selected>Select Type...</option>
+                <option>Book</option>
+                <option>Film</option>
+                <option>Audio</option>
+            </select>
+            <select id="selectBookAttr" name="selectBookAttr" style="display:none">
+                <option disabled selected>Search by...</option>
+                <option>ISBN</option>
+                <option>Author</option>
+            </select>
+            <select id="selectFilmAttr" name="selectFilmAttr" style="display: none">
+                <option disabled selected>Search by...</option>
+                <option>FilmID</option>
+                <option>Director</option>
+            </select>
+            <select id="selectAudioAttr" name="selectAudioAttr" style="display: none">
+                <option disabled selected>Search by...</option>
+                <option>AudioID</option>
+                <option>Artist</option>
+            </select>
+            <input type="submit" value="Search">
+        </form>
         <script>
             function setDisplayComponents() {
                 var selection = document.getElementById("selectType").value;
