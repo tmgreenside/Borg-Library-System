@@ -28,6 +28,7 @@ module.exports = function(app) {
 	
     app.use('/static', express.static('./static'));
     app.get('/', function (req, res) {
+        console.log(req.session.username);
         res.render('home.html');
     });
     
