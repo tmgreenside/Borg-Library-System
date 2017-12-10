@@ -48,9 +48,9 @@ module.exports = function(app) {
                     var searchBy = req.body.selectBookAttr;
                     switch(searchBy) {
                         case "Author":
-                            searchQuery += "a.authorName, b.title, lb.branchName, COUNT(i.inventory_id) AS NUM_COPIES FROM (LibraryBranch lb JOIN Inventory i USING (branchID) JOIN Book b ON b.ISBN = i.copy_id) JOIN AuthorCredits a USING (ISBN) WHERE a.authorName = 'Stephen King' GROUP BY a.authorName, b.title, lb.branchName ORDER BY NUM_COPIES DESC;";
+                            searchQuery = "SELECT a.authorName, b.title, lb.branchName, COUNT(i.inventory_id) AS NUM_COPIES FROM (LibraryBranch lb JOIN Inventory i USING (branchID) JOIN Book b ON b.ISBN = i.copy_id) JOIN AuthorCredits a USING (ISBN) WHERE a.authorName = '" + req.body.parameterEntry + "' GROUP BY a.authorName, b.title, lb.branchName ORDER BY NUM_COPIES DESC;";
                             dataAttrs = ["authorName", "title", "branchName", "NUM_COPIES"];
-                            
+                            break;
                     }
                     break;
                 case "Film":
@@ -61,7 +61,7 @@ module.exports = function(app) {
                     break;
             }
             
-            searchQuery = "SELECT a.authorName, b.title, lb.branchName, COUNT(i.inventory_id) AS NUM_COPIES FROM (LibraryBranch lb JOIN Inventory i USING (branchID) JOIN Book b ON b.ISBN = i.copy_id) JOIN AuthorCredits a USING (ISBN) WHERE a.authorName = '" + req.body.parameterEntry + "' GROUP BY a.authorName, b.title, lb.branchName ORDER BY NUM_COPIES DESC;";
+            // searchQuery = "SELECT a.authorName, b.title, lb.branchName, COUNT(i.inventory_id) AS NUM_COPIES FROM (LibraryBranch lb JOIN Inventory i USING (branchID) JOIN Book b ON b.ISBN = i.copy_id) JOIN AuthorCredits a USING (ISBN) WHERE a.authorName = '" + req.body.parameterEntry + "' GROUP BY a.authorName, b.title, lb.branchName ORDER BY NUM_COPIES DESC;";
             console.log(searchQuery);
             con.query(searchQuery, function (err, result) {
                 if (err) res.send("We have an error! Must refresh.\n" + err);
