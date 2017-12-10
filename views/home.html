@@ -15,17 +15,17 @@
                 <option>Film</option>
                 <option>Audio</option>
             </select>
-            <select id="selectBookAttr" name="selectBookAttr" style="display:none">
+            <select id="selectBookAttr" name="selectBookAttr" style="display:none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
                 <option>ISBN</option>
                 <option>Author</option>
             </select>
-            <select id="selectFilmAttr" name="selectFilmAttr" style="display: none">
+            <select id="selectFilmAttr" name="selectFilmAttr" style="display: none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
                 <option>FilmID</option>
                 <option>Director</option>
             </select>
-            <select id="selectAudioAttr" name="selectAudioAttr" style="display: none">
+            <select id="selectAudioAttr" name="selectAudioAttr" style="display: none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
                 <option>AudioID</option>
                 <option>Artist</option>
@@ -36,37 +36,43 @@
             function setDisplayComponents() {
                 var selection = document.getElementById("selectType").value;
                 var itemTypes = ["Book","Film","Audio"];
+                var searchBy;
                 for(var i = 0; i < itemTypes.length; i++) {
-                    if(selection === itemTypes[i])
+                    if(selection === itemTypes[i]) {
                         document.getElementById("select" + itemTypes[i] + "Attr").style="display:inline";
-                    else
+                        searchBy = "select" + itemTypes[i] + "Attr";
+                    } else
                         document.getElementById("select" + itemTypes[i] + "Attr").style="display:none";
-                }
-                switch(selection) {
-                    case "Book":
-                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "ISBN";
-                        document.getElementById("showResults").rows[0].cells.item(2).innerHTML = "Author";
-                        break;
-                    case "Film":
-                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "Film ID";
-                        break;
-                    case "Audio":
-                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "Audio ID";
-                        break;
                 }
             }
             
-            
         </script>
-        <table id="showResults">
+        <div id="displayResult">
+            <% if (parameter === "Author") { %>
             <tr>
-                <th>ISBN</th>
-                <th>Title</th>
                 <th>Author</th>
-                <th>Year</th>
-                <th>Publisher</th>
-                <th>Copies Available</th>
+                <th>Title</th>
+                <th>Branch</th>
+                <th>Items Available</th>
             </tr>
-        </table>
+            <% for (result in results) { %>
+            <tr>
+                <td><%= results[result]['authorName'] %></td>
+                <td><%= results[result]['title'] %></td>
+                <td><%= results[result]['branchName'] %></td>
+                <td><%= results[result]['NUM_COPIES'] %></td>
+            </tr>
+            <% } %>
+            <% } else {%>
+            <tr>
+                <td>Ha ha ha</td>
+                <td>You didn't</td>
+                <td>say the</td>
+                <td>magic word!</td>
+            </tr>
+            <% } %>
+            <h3>Random Task</h3>
+            <p><%= parameter %></p>
+        </div>
     </body>
 </html>

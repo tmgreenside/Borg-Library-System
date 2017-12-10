@@ -23,7 +23,7 @@ exports.findItems = function(req, res) {
             if (err) res.send("We have an error! Must refresh.\n" + err);
             else {
                 req.session.result = result;
-                res.render('home.html', {result});
+                res.render('home.html', {results: result});
             }
         });
     });
