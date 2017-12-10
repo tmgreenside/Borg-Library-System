@@ -23,20 +23,20 @@
             </select>
             <select id="selectBookAttr" name="selectBookAttr" style="display:none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
-                <option>ISBN</option>
+                <option>Title</option>
                 <option>Author</option>
             </select>
             <select id="selectFilmAttr" name="selectFilmAttr" style="display: none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
-                <option>FilmID</option>
+                <option>Title</option>
                 <option>Director</option>
             </select>
             <select id="selectAudioAttr" name="selectAudioAttr" style="display: none" onchange="setSearchComponents()">
                 <option disabled selected>Search by...</option>
-                <option>AudioID</option>
+                <option>Title</option>
                 <option>Artist</option>
             </select>
-            <input type="text" name="parameterEntry">
+            </br></br><input type="text" name="parameterEntry">
             <input type="submit" value="Find">
         </form>
         <script>
@@ -54,6 +54,7 @@
             }
             
         </script>
+        </br></br>
         <div id="displayResult">
             <table>
                 <tr>
