@@ -42,10 +42,31 @@
                     else
                         document.getElementById("select" + itemTypes[i] + "Attr").style="display:none";
                 }
+                switch(selection) {
+                    case "Book":
+                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "ISBN";
+                        document.getElementById("showResults").rows[0].cells.item(2).innerHTML = "Author";
+                        break;
+                    case "Film":
+                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "Film ID";
+                        break;
+                    case "Audio":
+                        document.getElementById("showResults").rows[0].cells.item(0).innerHTML = "Audio ID";
+                        break;
+                }
             }
             
             
         </script>
-        <%= result %>
+        <table id="showResults">
+            <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Publisher</th>
+                <th>Copies Available</th>
+            </tr>
+        </table>
     </body>
 </html>
