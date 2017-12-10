@@ -37,12 +37,26 @@ module.exports = function(app) {
         con.connect(function(err) {
             if (err) throw err;
             testquery = 'SELECT * FROM Book';
+            var itemType = req.body.selectType;
+            var searchQuery;
+            var dataAttrs;
+            
+            // switch statements will construct searchQuery which will be sent
+            // to database
+            switch(itemType) {
+                case "Book":
+                    var searchBy = req.body.selectBookAttr;
+                    break;
+                case "Film":
+                    var searchBy = req.body.selectFilmAttr;
+                    break;
+                case "Audio":
+                    var searchBy = req.body.selectAudioAttr;
+                    break;
+            }
             con.query(testquery, function (err, result) {
                 if (err) res.send("We have an error! Must refresh.\n" + err);
                 else {
-                    var itemType = req.body.selectType;
-                    
-                    req.session.result = result;
                     res.render('home.html', {results: result});
                 }
             });
