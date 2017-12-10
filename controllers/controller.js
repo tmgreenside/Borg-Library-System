@@ -4,9 +4,29 @@
 
 var sql = require('mysql');
 
+var dbConfig = {
+    server:'localhost',
+    database:'personal',
+    user:'trevapp',
+    password:'bowers321',
+    port:3306,
+    multipleStatements: true // overrides a protective measure
+};
+
 exports.findItems = function(req, res) {
-    // string builder to create query
-    var queryItems = "SELECT * FROM " + req.body.selectType;
-    console.log("Something show that this function is being called");
-    res.send("Exterminate! Exterminate!");
+    var con = sql.createConnection(dbConfig);
+        
+    con.connect(function(err) {
+        if (err) throw err;
+        testquery = 'SELECT * FROM Book';
+        con.query(testquery, function (err, result) {
+            if (err) res.send("We have an error! Must refresh.\n" + err);
+            else {
+                req.session.result = result;
+                res.render('home.html', {result});
+            }
+        });
+    });
+    
+    con.end();
 };

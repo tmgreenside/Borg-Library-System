@@ -30,7 +30,7 @@
                 <option>AudioID</option>
                 <option>Artist</option>
             </select>
-            <input type="submit" value="Search">
+            <input type="submit" value="Find">
         </form>
         <script>
             function setDisplayComponents() {
@@ -43,6 +43,9 @@
                         document.getElementById("select" + itemTypes[i] + "Attr").style="display:none";
                 }
             }
+            
+            
         </script>
+        <%= result %>
     </body>
 </html>
