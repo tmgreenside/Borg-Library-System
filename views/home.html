@@ -48,31 +48,20 @@
             
         </script>
         <div id="displayResult">
-            <% if (parameter === "Author") { %>
-            <tr>
-                <th>Author</th>
-                <th>Title</th>
-                <th>Branch</th>
-                <th>Items Available</th>
-            </tr>
-            <% for (result in results) { %>
-            <tr>
-                <td><%= results[result]['authorName'] %></td>
-                <td><%= results[result]['title'] %></td>
-                <td><%= results[result]['branchName'] %></td>
-                <td><%= results[result]['NUM_COPIES'] %></td>
-            </tr>
-            <% } %>
-            <% } else {%>
-            <tr>
-                <td>Ha ha ha</td>
-                <td>You didn't</td>
-                <td>say the</td>
-                <td>magic word!</td>
-            </tr>
-            <% } %>
-            <h3>Random Task</h3>
-            <p><%= parameter %></p>
+            <table>
+                <tr>
+                    <% for (var attr in attrs) { %>
+                    <td><%= attrs[attr] %></td>
+                    <% } %>
+                </tr>
+                <% for (var result in results) { %>
+                <tr>
+                    <% for (var attr in attrs) { %>
+                    <td><%= results[result][attrs[attr]] %></td>
+                    <% } %>
+                </tr>
+                <% } %>
+            </table>
         </div>
     </body>
 </html>
